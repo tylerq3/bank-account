@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/scripts.js"></script>
+  <title>Bank Account</title>
+</head>
+<body>
+  <h1>Welcome to the Epicodus Credit Union!</h1>
+
+  <form id="register-account">
+    <h2>Register a new account:</h2>
+    <label for="full-name">Name:</label>
+    <input type="text" id="full-name" name="full-name">
+    <label for="initial-deposit">Initial Deposit:</label>
+    <input type="text" id="initial-deposit" name="initial-deposit">
+    <button type="submit">Register</button>
+  </form>
+
+  <form id="deposit-withdraw" class="hidden">
+    <h2>Deposit or withdraw funds:</h2>
+    <label for="deposit-amount">Deposit Amount:</label>
+    <input type="text" id="deposit-amount" name="deposit-amount">
+    <button type="button" id="depositButton">Deposit</button>
+    <label for="withdraw-amount">Withdraw Amount:</label>
+    <input type="text" id="withdraw-amount" name="withdraw-amount">
+    <button type="button" id="withdrawButton">Withdraw</button>
+  </form>
+
+  <form id="current-balance" class="hidden">
+    <h3>Current Balance:</h3>
+    <input type="text" id="current-balance" name="current-balance">
+  </form>
+  
+</body>
+</html>
