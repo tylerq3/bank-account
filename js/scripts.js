@@ -1,18 +1,18 @@
 // Business Logic
 
 function BankAccount() {
-  this.name = " ";
+  this.name = "";
   this.balance = 0;
 }
 
 
 
 BankAccount.prototype.deposit = function (depositAmount) {
-  this.balance += depositAmount.toFixed(2);
+  this.balance += depositAmount;
 }
 
 BankAccount.prototype.withdraw = function (withdrawAmount) {
-  this.balance -= withdrawAmount.toFixed(2);
+  this.balance -= withdrawAmount;
 }
 
 BankAccount.prototype.updateName = function (nameOnAccount) {
@@ -20,22 +20,61 @@ BankAccount.prototype.updateName = function (nameOnAccount) {
 }
 
 BankAccount.prototype.displayBalance = function () {
-  return "$" + this.balance;
+  return "$" + this.balance.toFixed(2);
 }
 
 // User Interface Logic
+let newAct = new BankAccount();
 
-// registerHandler => create a new bankAccount object from the form, unhide the current balance, and update current balance
 
 // moneyActionHandler => use our functionalities to modify the bankAccount, and update current balance
-
+function depositHandler() {
+  let newDeposit = parseFloat(document.getElementById("deposit-amount").value);
+  if (newDeposit>0){
+  newAct.deposit(newDeposit);
+  let actBalance = document.getElementById("current-balance");
+  actBalance.value = newAct.displayBalance();
+  document.getElementById("deposit-error").innerText="Deposit Successful";
+  document.getElementById("deposit-amount").value="";
+} else {
+  document.getElementById("deposit-error").innerText="Please Enter a Positive Amount";
+  document.getElementById("deposit-amount").value="";
+}
+}
 // overdraft => do something if we withdraw more than we wanted to
+function withdrawHandler() {
+  let newWithdraw = parseFloat(document.getElementById("withdraw-amount").value);
+  if (newWithdraw <= newAct.balance){
+  newAct.withdraw(newWithdraw);
+  let actBalance = document.getElementById("current-balance");
+  actBalance.value = newAct.displayBalance();
+  document.getElementById("withdraw-error").innerText="Withdraw Successful";
+  document.getElementById("withdraw-amount").value="";
+} else {
+  document.getElementById("withdraw-error").innerText="Insufficient Funds";
+  document.getElementById("withdraw-amount").value="";
+}
+}
+// registerHandler =>  update current balance 
+function registerHandler(event) {
+  event.preventDefault();
+  let newName = document.getElementById("full-name").value;
+  let initialDeposit = document.getElementById("initial-deposit").value;
+  newAct.name = newName;
+  newAct.balance = parseFloat(initialDeposit);
+  let actBalance = document.getElementById("current-balance");
+  actBalance.value = newAct.displayBalance();
+  let actName = document.getElementById("account-name");
+  actName.value = newAct.name;
+  // unhide the current balance
+}
 
 window.addEventListener("load",function() {
-let registerSection = querySelector("form#register-account");
+let registerSection = document.querySelector("form#register-account");
 let depositButton = document.getElementById("depositButton");
 let withdrawButton = document.getElementById("withdrawButton");
 registerSection.addEventListener("submit", registerHandler);
 depositButton.addEventListener("click", depositHandler);
 withdrawButton.addEventListener("click", withdrawHandler);
 });
+
