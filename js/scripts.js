@@ -67,6 +67,9 @@ function registerHandler(event) {
   let actName = document.getElementById("account-name");
   actName.value = newAct.name;
   // unhide the current balance
+  document.getElementById("register-account").setAttribute("class" , "hidden");
+  document.getElementById("deposit-withdraw").removeAttribute("class" , "hidden");
+  document.getElementById("account-info").removeAttribute("class" , "hidden");
 }
 
 window.addEventListener("load",function() {
